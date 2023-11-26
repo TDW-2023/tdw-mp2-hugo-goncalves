@@ -2,7 +2,7 @@ name: Continuous Integration & Delivery
 on:
   push:
     branches:
-      - '**'
+      - "**"
 jobs:
   verify:
     name: Validate Code Quality
@@ -18,7 +18,7 @@ jobs:
         run: npm run lint
 
       - name: Run Prettier
-        run: npm run prettier
+        run: npm run analyze-syntax
 
       - name: Run Tests
         run: npm run test
