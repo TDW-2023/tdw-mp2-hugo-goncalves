@@ -12,13 +12,14 @@ export default function RecipeItem({
         <div className="flex flex-row items-center">
           <div className="h-full w-full">
             <img
+              aria-label={recipeName ? recipeName : "Recipe Name Placeholder"}
               className="rounded-full"
               src={recipeImage ? recipeImage : "https://placeholder.co/150x150"}
               alt="Recipe Item Image"
             />
           </div>
           <div className="flex flex-col ms-8">
-            <a href="#">
+            <a href={`/recipes/${recipeId}`}>
               <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                 {recipeName ? recipeName : "Recipe Name Placeholder"}
               </h5>
