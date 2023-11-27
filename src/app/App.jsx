@@ -1,13 +1,20 @@
 import "./App.css";
-import RecipeCard from "../components/RecipeCard/RecipeCard.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "../pages/HomePage.jsx";
 import Navbar from "../components/Navbar/Navbar.jsx";
 
-function App() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+]);
 
+function App() {
   return (
     <>
       <Navbar />
-      <RecipeCard/>
+      <RouterProvider router={router} />
     </>
   );
 }
