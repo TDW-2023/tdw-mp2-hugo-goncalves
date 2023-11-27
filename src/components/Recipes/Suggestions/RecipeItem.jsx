@@ -58,4 +58,4 @@ RecipeItem.propTypes = {
   recipeName: PropTypes.string,
   recipeImage: PropTypes.string,
   recipeDescription: PropTypes.string,
-}
+};
