@@ -1,4 +1,5 @@
 import RecipeItem from "./RecipeItem.jsx";
+import PropTypes from "prop-types";
 
 export default function RecipeSuggestions({ recipes }) {
   return (
@@ -41,3 +42,7 @@ export default function RecipeSuggestions({ recipes }) {
     </>
   );
 }
+
+RecipeSuggestions.propTypes = {
+  recipes: PropTypes.array,
+};

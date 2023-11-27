@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function RecipeCategory({ categoryName, categoryImageURI }) {
   return (
     <div className="flex flex-col items-center p-6">
@@ -18,3 +20,8 @@ export default function RecipeCategory({ categoryName, categoryImageURI }) {
     </div>
   );
 }
+
+RecipeCategory.propTypes = {
+  categoryName: PropTypes.string,
+  categoryImageURI: PropTypes.string,
+};

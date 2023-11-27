@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function RecipeItem({
   recipeId,
   recipeName,
@@ -49,4 +51,11 @@ export default function RecipeItem({
       </div>
     </>
   );
+}
+
+RecipeItem.propTypes = {
+  recipeId: PropTypes.number,
+  recipeName: PropTypes.string,
+  recipeImage: PropTypes.string,
+  recipeDescription: PropTypes.string,
 }

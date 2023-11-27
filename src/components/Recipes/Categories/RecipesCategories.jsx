@@ -1,4 +1,5 @@
 import RecipeCategory from "./RecipeCategory.jsx";
+import PropTypes from "prop-types";
 
 export default function RecipesCategories({ recipesCategories }) {
   return (
@@ -31,3 +32,7 @@ export default function RecipesCategories({ recipesCategories }) {
     </div>
   );
 }
+
+RecipesCategories.propTypes = {
+  recipesCategories: PropTypes.array,
+};
