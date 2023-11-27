@@ -10,6 +10,7 @@ export default function RecipeCategory({ categoryName, categoryImageURI }) {
             categoryImageURI ? categoryImageURI : "https://placeholder.co/150"
           }
           alt="recipe category"
+          aria-label={categoryName ? categoryName : "Category Placeholder"}
         />
       </div>
       <div className="mt-3">
