@@ -81,13 +81,13 @@ export const freeRecipesAPISlice = createApi({
             app_id: appId,
             app_key: apiKey,
             q: query
-          }
+          },
         };
       },
       transformResponse: (response) => {
         return transformRecipesResponse(response);
-      }
-    })
+      },
+    }),
   }),
 });
 
