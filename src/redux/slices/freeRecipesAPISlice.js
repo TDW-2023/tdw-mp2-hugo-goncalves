@@ -59,7 +59,7 @@ export const freeRecipesAPISlice = createApi({
             Snack:
               "https://www.twopeasandtheirpod.com/wp-content/uploads/2017/09/Sweet-and-Salty-Snack-Board-3.jpg",
             Teatime:
-              "https://teatimemagazine.com/wp-content/uploads/2017/07/Teatime-Celebrations-2017-Special-Issue-Preview-696x537.jpg"
+              "https://teatimemagazine.com/wp-content/uploads/2017/07/Teatime-Celebrations-2017-Special-Issue-Preview-696x537.jpg",
           };
           return {
             title: category,
