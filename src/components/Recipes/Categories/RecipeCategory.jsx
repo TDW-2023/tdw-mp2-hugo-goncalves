@@ -5,7 +5,7 @@ export default function RecipeCategory({ categoryName, categoryImageURI }) {
     <div className="flex flex-col items-center p-6">
       <div className="h-24 w-24">
         <img
-          className="rounded-full"
+          className="rounded-full h-full w-full object-cover"
           src={
             categoryImageURI ? categoryImageURI : "https://placeholder.co/150"
           }

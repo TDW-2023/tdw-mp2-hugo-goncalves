@@ -149,8 +149,8 @@ export default function RecipeSuggestions() {
           <div>Loading...</div>
         ) : error ? (
           <div>Oh no, there was an error</div>
-        ) : (
-          data && data.map((recipe, index) => {
+        ) : data ?
+          data.map((recipe, index) => {
             return <RecipeItem
               key={'RecipeItem_' + index}
               recipeId={recipe.id}
@@ -158,8 +158,13 @@ export default function RecipeSuggestions() {
               recipeImage={recipe.image}
               recipeDescription={recipe.description}
             />
-          }))
-        }
+          }) : (
+            <>
+              <RecipeItem />
+              <RecipeItem />
+              <RecipeItem />
+            </>
+          )}
       </div>
     </>
   );
