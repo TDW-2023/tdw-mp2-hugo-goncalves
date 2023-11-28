@@ -14,7 +14,7 @@ const transformRecipesResponse = (response) => {
       id: recipeId,
       title: recipe.label,
       description: recipe.ingredientLines.slice(0, 2).join(", "),
-      image: recipe.image
+      image: recipe.image,
     };
   });
 };
@@ -22,7 +22,7 @@ const transformRecipesResponse = (response) => {
 export const freeRecipesAPISlice = createApi({
   reducerPath: "recipesAPISlice",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.edamam.com"
+    baseUrl: "https://api.edamam.com",
   }),
   endpoints: (builder) => ({
     getRandomRecipes: builder.query({
@@ -35,7 +35,7 @@ export const freeRecipesAPISlice = createApi({
             app_id: appId,
             app_key: apiKey,
             diet: "balanced",
-            random: true
+            random: true,
           },
         };
       },
@@ -46,13 +46,13 @@ export const freeRecipesAPISlice = createApi({
     getRecipeCategories: builder.query({
       query: () => {
         return {
-          url: "/doc/open-api/recipe-search-v2.json"
+          url: "/doc/open-api/recipe-search-v2.json",
         };
       },
       transformResponse: (response) => {
         return response.paths[
           "/api/recipes/v2"
-          ].get.parameters[10].items.enum.map((category) => {
+        ].get.parameters[10].items.enum.map((category) => {
           const categoriesImages = {
             Breakfast:
               "https://unpeeledjournal.com/wp-content/uploads/2023/04/52828002762_99f3b99b45_b.jpg",
@@ -67,7 +67,7 @@ export const freeRecipesAPISlice = createApi({
           };
           return {
             title: category,
-            image: categoriesImages[category]
+            image: categoriesImages[category],
           };
         });
       },
@@ -80,7 +80,7 @@ export const freeRecipesAPISlice = createApi({
             type: "public",
             app_id: appId,
             app_key: apiKey,
-            q: query
+            q: query,
           },
         };
       },
@@ -94,5 +94,5 @@ export const freeRecipesAPISlice = createApi({
 export const {
   useGetRandomRecipesQuery,
   useGetRecipeCategoriesQuery,
-  useGetRecipeByCategoryQuery
+  useGetRecipeByCategoryQuery,
 } = freeRecipesAPISlice;
