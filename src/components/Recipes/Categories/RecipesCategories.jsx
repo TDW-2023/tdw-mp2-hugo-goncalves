@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useGetRecipeCategoriesQuery } from "../../../redux/slices/freeRecipesAPISlice.js";
 
 export default function RecipesCategories() {
-
   const { data, error, isLoading } = useGetRecipeCategoriesQuery();
 
   return (
@@ -22,14 +21,13 @@ export default function RecipesCategories() {
           ) : error ? (
             <div>Oh no, there was an error</div>
           ) : data ? (
-            data
-              .map((category, index) => (
-                <RecipeCategory
-                  key={"RecipeCategory_" + index}
-                  categoryName={category.title}
-                  categoryImageURI={category.image}
-                />
-              ))
+            data.map((category, index) => (
+              <RecipeCategory
+                key={"RecipeCategory_" + index}
+                categoryName={category.title}
+                categoryImageURI={category.image}
+              />
+            ))
           ) : (
             <>
               <RecipeCategory />

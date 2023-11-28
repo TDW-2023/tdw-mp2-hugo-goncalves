@@ -55,7 +55,7 @@ export default function RecipeItem({
 }
 
 RecipeItem.propTypes = {
-  recipeId: PropTypes.number,
+  recipeId: PropTypes.string,
   recipeName: PropTypes.string,
   recipeImage: PropTypes.string,
   recipeDescription: PropTypes.string,
