@@ -1,7 +1,10 @@
 import RecipeCategory from "./RecipeCategory.jsx";
 import PropTypes from "prop-types";
+import { useGetRecipeCategoriesQuery } from "../../../redux/slices/freeRecipesAPISlice.js";
 
-export default function RecipesCategories({ recipesCategories }) {
+export default function RecipesCategories() {
+  const { data, error, isLoading } = useGetRecipeCategoriesQuery();
+
   return (
     <div className="container mx-auto">
       <div className="flex flex-col items-center justify-center px-4 mx-auto text-center sm:px-6 lg:px-8">
@@ -13,11 +16,15 @@ export default function RecipesCategories({ recipesCategories }) {
           Some Food categories you may be interested in!
         </p>
         <div className="flex flex-row mt-5 space-x-12">
-          {recipesCategories ? (
-            recipesCategories.map((category) => (
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : error ? (
+            <div>Oh no, there was an error</div>
+          ) : data ? (
+            data.map((category, index) => (
               <RecipeCategory
-                key={category.id}
-                categoryName={category.name}
+                key={"RecipeCategory_" + index}
+                categoryName={category.title}
                 categoryImageURI={category.image}
               />
             ))

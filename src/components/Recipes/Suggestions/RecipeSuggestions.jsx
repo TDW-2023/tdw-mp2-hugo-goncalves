@@ -1,7 +1,9 @@
 import RecipeItem from "./RecipeItem.jsx";
-import PropTypes from "prop-types";
+import { useGetRandomRecipesQuery } from "../../../redux/slices/freeRecipesAPISlice.js";
 
-export default function RecipeSuggestions({ recipes }) {
+export default function RecipeSuggestions() {
+  const { data, error, isLoading } = useGetRandomRecipesQuery();
+
   return (
     <>
       <div className="container mx-auto">
@@ -16,33 +18,31 @@ export default function RecipeSuggestions({ recipes }) {
           </p>
         </div>
       </div>
-      <div className="container mx-auto h-full pb-16">
-        <div className="grid grid-cols-3">
-          {recipes ? (
-            recipes.map((recipe, index) => {
-              return (
-                <RecipeItem
-                  key={index}
-                  recipeId={recipe.id}
-                  recipeName={recipe.name}
-                  recipeImage={recipe.image}
-                  recipeDescription={recipe.description}
-                />
-              );
-            })
-          ) : (
-            <>
-              <RecipeItem />
-              <RecipeItem />
-              <RecipeItem />
-            </>
-          )}
-        </div>
+      <div className="container mx-auto h-full pb-16 grid grid-cols-3">
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>Oh no, there was an error</div>
+        ) : data ? (
+          data.map((recipe, index) => {
+            return (
+              <RecipeItem
+                key={"RecipeItem_" + index}
+                recipeId={recipe.id}
+                recipeName={recipe.title}
+                recipeImage={recipe.image}
+                recipeDescription={recipe.description}
+              />
+            );
+          })
+        ) : (
+          <>
+            <RecipeItem />
+            <RecipeItem />
+            <RecipeItem />
+          </>
+        )}
       </div>
     </>
   );
 }
-
-RecipeSuggestions.propTypes = {
-  recipes: PropTypes.array,
-};

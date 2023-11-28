@@ -10,7 +10,7 @@ export default function RecipeItem({
     <>
       <div className="m-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div className="flex flex-row items-center">
-          <div className="h-full w-full">
+          <div className="basis-2/6">
             <img
               aria-label={recipeName ? recipeName : "Recipe Name Placeholder"}
               className="rounded-full"
@@ -18,7 +18,7 @@ export default function RecipeItem({
               alt="Recipe Item Image"
             />
           </div>
-          <div className="flex flex-col ms-8">
+          <div className="flex flex-col basis-4/6 ms-6">
             <a href={`/recipes/${recipeId}`}>
               <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                 {recipeName ? recipeName : "Recipe Name Placeholder"}
@@ -55,7 +55,7 @@ export default function RecipeItem({
 }
 
 RecipeItem.propTypes = {
-  recipeId: PropTypes.number,
+  recipeId: PropTypes.string,
   recipeName: PropTypes.string,
   recipeImage: PropTypes.string,
   recipeDescription: PropTypes.string,
