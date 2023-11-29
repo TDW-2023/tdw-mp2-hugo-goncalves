@@ -27,17 +27,26 @@ export default function SearchResultItem({ recipe }) {
 
           <div className="flex flex-wrap basis-2/6 ">
             {recipe.time ? (
-              <div className="flex flex-col grow justify-center items-center" aria-label="recipe-metric">
+              <div
+                className="flex flex-col grow justify-center items-center"
+                aria-label="recipe-metric"
+              >
                 <RecipeMetric name="Time" value={recipe.time} unit={"min"} />
               </div>
             ) : null}
-            <div className="flex flex-col grow justify-center items-center" aria-label="recipe-metric">
+            <div
+              className="flex flex-col grow justify-center items-center"
+              aria-label="recipe-metric"
+            >
               <RecipeMetric
                 name="Ingredients"
                 value={recipe.ingredients ? recipe.ingredients.length : 0}
               />
             </div>
-            <div className="flex flex-col grow justify-center items-center" aria-label="recipe-metric">
+            <div
+              className="flex flex-col grow justify-center items-center"
+              aria-label="recipe-metric"
+            >
               <RecipeMetric
                 name="Calories"
                 value={Math.round(recipe.calories)}
