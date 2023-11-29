@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 export default function RecipeTagsGroup({ tags }) {
   const tagsToPresent = useMemo(() => {
+    if (!tags) return [];
+
     const tagsToPresent = tags.slice(0, 5);
 
     if (tags.length > 5) tagsToPresent.push("...");
@@ -23,5 +25,5 @@ export default function RecipeTagsGroup({ tags }) {
 }
 
 RecipeTagsGroup.propTypes = {
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string),
 };
