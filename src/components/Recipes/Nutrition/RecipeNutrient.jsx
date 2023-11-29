@@ -13,7 +13,7 @@ export default function RecipeNutrient({
         aria-label="recipe-individual-nutrient"
       >
         <span
-          className="h-6 w-6 rounded-full"
+          className="h-5 w-5 rounded-full"
           style={{ background: nutrientColor }}
         />
         <div className="flex flex-col ms-3">
