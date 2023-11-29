@@ -13,8 +13,16 @@ const transformRecipesResponse = (response) => {
     return {
       id: recipeId,
       title: recipe.label,
-      description: recipe.ingredientLines.slice(0, 2).join(", "),
+      author: recipe.source,
+      tags: recipe.dietLabels.concat(recipe.healthLabels),
       image: recipe.image,
+      ingredients: recipe.ingredients,
+      calories: recipe.calories,
+      time: recipe.totalTime,
+      cuisineType: recipe.cuisineType,
+      mealType: recipe.mealType,
+      dishType: recipe.dishType,
+      nutrients: recipe.totalNutrients,
     };
   });
 };
@@ -72,7 +80,7 @@ export const freeRecipesAPISlice = createApi({
         });
       },
     }),
-    getRecipesByQuery: builder.query({
+    getRecipesFromSearch: builder.query({
       query: (query) => {
         return {
           url: "/api/recipes/v2",
@@ -95,4 +103,5 @@ export const {
   useGetRandomRecipesQuery,
   useGetRecipeCategoriesQuery,
   useGetRecipeByCategoryQuery,
+  useGetRecipesFromSearchQuery,
 } = freeRecipesAPISlice;
