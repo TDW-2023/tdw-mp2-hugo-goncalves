@@ -10,7 +10,7 @@ export default function SearchResultItem({ recipe }) {
   return (
     <>
       <div className="flex flex-row h-full p-6 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
-        <RecipeImage recipeImage={recipe.image} scale="medium"/>
+        <RecipeImage recipeImage={recipe.image} scale="medium" />
         <div className="flex grow justify-between">
           <div className="flex flex-col ms-12 basis-5/12 xl:me-8">
             <RecipeTitle

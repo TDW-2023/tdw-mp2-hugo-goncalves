@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function RecipeImage({ recipeImage, scale }) {
   if (scale === "small")
     return (
@@ -32,3 +34,8 @@ export default function RecipeImage({ recipeImage, scale }) {
       />
     );
 }
+
+RecipeImage.propTypes = {
+  recipeImage: PropTypes.string,
+  scale: PropTypes.string,
+};
