@@ -2,6 +2,7 @@ import RecipeTitle from "../../Recipes/Information/RecipeTitle.jsx";
 import RecipeMetric from "../../Recipes/Information/RecipeMetric.jsx";
 import RecipeTagsGroup from "../../Recipes/Tags/RecipeTagsGroup.jsx";
 import PropTypes from "prop-types";
+import RecipeImage from "../../Recipes/Information/RecipeImage.jsx";
 
 export default function SearchResultItem({ recipe }) {
   if (!recipe) return;
@@ -9,12 +10,7 @@ export default function SearchResultItem({ recipe }) {
   return (
     <>
       <div className="flex flex-row h-full p-6 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
-        <img
-          className="max-h-32 rounded-lg"
-          src={recipe.image ? recipe.image : "https://placeholder.co/150"}
-          alt="Search Result Recipe Image"
-        />
-
+        <RecipeImage recipeImage={recipe.image} scale="medium"/>
         <div className="flex grow justify-between">
           <div className="flex flex-col ms-12 basis-5/12 xl:me-8">
             <RecipeTitle
