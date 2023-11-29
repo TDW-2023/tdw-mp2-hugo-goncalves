@@ -96,6 +96,37 @@ export const freeRecipesAPISlice = createApi({
         return transformRecipesResponse(response);
       },
     }),
+    getRecipeById: builder.query({
+      query: (recipeId) => {
+        return {
+          url: `/api/recipes/v2/${recipeId}`,
+          params: {
+            type: "public",
+            app_id: appId,
+            app_key: apiKey,
+          },
+        };
+      },
+      transformResponse: (response) => {
+        const recipe = response.recipe;
+
+        return {
+          title: recipe.label,
+          author: recipe.source,
+          url: recipe.url,
+          tags: recipe.dietLabels.concat(recipe.healthLabels),
+          image: recipe.image,
+          ingredients: recipe.ingredients,
+          calories: recipe.calories,
+          time: recipe.totalTime,
+          weight: recipe.totalWeight,
+          cuisineType: recipe.cuisineType,
+          mealType: recipe.mealType,
+          dishType: recipe.dishType,
+          nutrients: recipe.totalNutrients,
+        };
+      },
+    }),
   }),
 });
 
@@ -104,4 +135,5 @@ export const {
   useGetRecipeCategoriesQuery,
   useGetRecipeByCategoryQuery,
   useGetRecipesFromSearchQuery,
+  useGetRecipeByIdQuery,
 } = freeRecipesAPISlice;
