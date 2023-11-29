@@ -8,7 +8,10 @@ export default function RecipeNutrient({
 }) {
   return (
     <>
-      <div className="flex flex-row items-center my-1">
+      <div
+        className="flex flex-row items-center my-1"
+        aria-label="recipe-individual-nutrient"
+      >
         <span
           className="h-6 w-6 rounded-full"
           style={{ background: nutrientColor }}
