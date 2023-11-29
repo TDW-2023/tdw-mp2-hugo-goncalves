@@ -6,7 +6,7 @@ export default function Navbar() {
       <nav className="navbar-title bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <div className="container flex flex-wrap items-center justify-between mx-auto py-8">
           <a
-            href="#"
+            href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
