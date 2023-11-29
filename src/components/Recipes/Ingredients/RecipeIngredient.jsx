@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function RecipeIngredient({ ingredient }) {
   return (
     <>
@@ -8,7 +10,9 @@ export default function RecipeIngredient({ ingredient }) {
           alt="Recipe Ingredient Image"
         />
         <div className="flex flex-col justify-center items-start">
-          <h3 className="text-2xl font-bold mt-3 text-black dark:text-white">{ingredient.food}</h3>
+          <h3 className="text-2xl font-bold mt-3 text-black dark:text-white">
+            {ingredient.food}
+          </h3>
           <p className="text-blue-500 font-bold">
             <span className="text-blue-500">{`${ingredient.quantity} ${ingredient.measure}`}</span>
             <span className="text-gray-500 ms-1">{`(${Math.round(
@@ -21,3 +25,7 @@ export default function RecipeIngredient({ ingredient }) {
     </>
   );
 }
+
+RecipeIngredient.propTypes = {
+  ingredient: PropTypes.object.isRequired,
+};
