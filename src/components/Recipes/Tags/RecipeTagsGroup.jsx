@@ -13,7 +13,7 @@ export default function RecipeTagsGroup({ tags, maxTags }) {
     if (tags.length > maximumTags) tagsToPresent.push("...");
 
     return tagsToPresent;
-  }, [tags]);
+  }, [tags, maxTags]);
 
   return (
     <>
