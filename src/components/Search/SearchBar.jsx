@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SearchBar() {
+export default function SearchBar({query}) {
+
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
@@ -14,7 +15,7 @@ export default function SearchBar() {
   return (
     <>
       <div className="flex flex-row justify-center mt-14">
-        <div className="flex flex-row p-4 w-5/12 rounded-3xl bg-gray-200 dark:bg-gray-800">
+        <div className="flex flex-row items-center p-4 w-5/12 rounded-3xl bg-gray-200 dark:bg-gray-800">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -27,7 +28,8 @@ export default function SearchBar() {
           <input
             type="text"
             placeholder="Search..."
-            className="bg-gray-200 dark:bg-gray-800 w-full mx-6 outline-none text-black dark:text-gray-300 text-lg"
+            value={query ? query : null}
+            className="bg-gray-200 dark:bg-gray-800 w-full mx-6 border-none outline-none text-black focus:ring-0 dark:text-gray-300 text-lg"
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
           />
