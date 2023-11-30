@@ -8,7 +8,7 @@ export default function RecipeMetric({ name, value, unit }) {
           <p className="text-3xl font-extrabold text-black dark:text-white">
             {value}
           </p>
-          <p className="text-sm text-black max-w-2xl">{unit}</p>
+          <p className="text-sm text-black dark:text-white max-w-2xl">{unit}</p>
         </div>
         <p className="text-sm text-blue-600 max-w-2xl font-bold">{name}</p>
       </div>

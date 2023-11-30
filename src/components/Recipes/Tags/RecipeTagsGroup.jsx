@@ -2,16 +2,18 @@ import RecipeTag from "./RecipeTag.jsx";
 import { useMemo } from "react";
 import PropTypes from "prop-types";
 
-export default function RecipeTagsGroup({ tags }) {
+export default function RecipeTagsGroup({ tags, maxTags }) {
   const tagsToPresent = useMemo(() => {
+    const maximumTags = maxTags ? maxTags : 3;
+
     if (!tags) return [];
 
-    const tagsToPresent = tags.slice(0, 5);
+    const tagsToPresent = tags.slice(0, maximumTags);
 
-    if (tags.length > 5) tagsToPresent.push("...");
+    if (tags.length > maximumTags) tagsToPresent.push("...");
 
     return tagsToPresent;
-  }, [tags]);
+  }, [tags, maxTags]);
 
   return (
     <>
@@ -26,4 +28,5 @@ export default function RecipeTagsGroup({ tags }) {
 
 RecipeTagsGroup.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
+  maxTags: PropTypes.number,
 };

@@ -9,7 +9,7 @@ export default function SearchPage() {
 
   return (
     <>
-      <div className="flex flex-1 flex-col bg-white dark:bg-gray-950 h-full max-h-full min-h-full">
+      <div className="flex flex-col bg-white dark:bg-gray-950 min-h-screen">
         <SearchBar />
         <div className="container mx-auto space-y-8 my-16">
           {isLoading ? (
