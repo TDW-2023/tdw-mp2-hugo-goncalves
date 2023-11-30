@@ -1,8 +1,8 @@
-import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "../pages/HomePage.jsx";
 import Navbar from "../components/Navbar/Navbar.jsx";
 import SearchPage from "../pages/SearchPage.jsx";
+import RecipePage from "../pages/RecipePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +18,10 @@ const router = createBrowserRouter([
         element: <SearchPage />,
       },
     ],
+  },
+  {
+    path: "/recipes/:recipeId",
+    element: <RecipePage />,
   },
 ]);
 
