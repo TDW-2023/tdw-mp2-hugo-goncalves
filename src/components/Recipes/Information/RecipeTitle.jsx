@@ -4,11 +4,17 @@ export default function RecipeTitle({ id, name, author }) {
   return (
     <>
       <div className="flex flex-col">
-        <a href={`/recipes/${id}`}>
+        {id ? (
+          <a href={`/recipes/${id}`}>
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+              {name ? name : "Untitled Recipe"}
+            </h2>
+          </a>
+        ) : (
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
             {name ? name : "Untitled Recipe"}
           </h2>
-        </a>
+        )}
         <a>
           <h3 className="text-lg font-bold tracking-tight sm:text-lg">
             <span className="dark:text-white text-sm">by</span>
@@ -23,7 +29,7 @@ export default function RecipeTitle({ id, name, author }) {
 }
 
 RecipeTitle.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   name: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
 };
