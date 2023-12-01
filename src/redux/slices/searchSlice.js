@@ -5,15 +5,15 @@ export const searchSlice = createSlice({
   initialState: {
     filterOption: { id: "diet", name: "Diet" },
     selectedFilters: [],
-    searchQuery: undefined,
     searchResults: [],
+    nextPageUrl: undefined,
   },
   reducers: {
     setSearchResults: (state, action) => {
       state.searchResults = action.payload;
     },
     addSearchResults: (state, action) => {
-      state.searchResults.concat(action.payload);
+      state.searchResults = state.searchResults.concat(action.payload);
     },
     clearSearchResults: (state) => {
       state.searchResults = [];
@@ -24,13 +24,13 @@ export const searchSlice = createSlice({
     addSelectedFilter: (state, action) => {
       state.selectedFilters.push(action.payload);
     },
-    setSearchQuery: (state, action) => {
-      state.searchQuery = action.payload;
-    },
     removeSelectedFilter: (state, action) => {
       state.selectedFilters = state.selectedFilters.filter(
         (filter) => filter.filterName !== action.payload,
       );
+    },
+    setNextPageUrl: (state, action) => {
+      state.nextPageUrl = action.payload;
     },
   },
 });
@@ -40,10 +40,10 @@ export const {
   setSearchResults,
   addSearchResults,
   clearSearchResults,
-  setSearchQuery,
   setFilterOption,
   addSelectedFilter,
   removeSelectedFilter,
+  setNextPageUrl,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

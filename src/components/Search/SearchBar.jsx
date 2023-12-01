@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetRecipesFromSearchQuery } from "../../redux/slices/freeRecipesAPISlice.js";
-import { setSearchResults } from "../../redux/slices/searchSlice.js";
+import {
+  setSearchResults,
+  setNextPageUrl,
+} from "../../redux/slices/searchSlice.js";
 import PropTypes from "prop-types";
 
 export default function SearchBar({ query }) {
-  const [searchQuery, setSearchQuery] = useState(query);
+  const [localSearchQuery, setLocalSearchQuery] = useState(query);
   const [shouldReFetch, setShouldReFetch] = useState(true);
 
   const dispatch = useDispatch();
@@ -29,23 +32,26 @@ export default function SearchBar({ query }) {
   };
 
   const { data } = useGetRecipesFromSearchQuery(
-    { query: searchQuery, filters: transformFilters(selectedFilters) },
+    { query: localSearchQuery, filters: transformFilters(selectedFilters) },
     { skip: !shouldReFetch },
   );
 
   useEffect(() => {
     dispatch(setSearchResults(data));
-    if (data) setShouldReFetch(false); // Disable re-fetching
+    if (data) {
+      dispatch(setNextPageUrl(data[0]?.nextPage));
+      setShouldReFetch(false); // Disable re-fetching
+    }
   }, [data, dispatch]);
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      if (!searchQuery || searchQuery === "") {
+      if (!localSearchQuery || localSearchQuery === "") {
         console.log("No search query");
         return;
       }
       setShouldReFetch(true); // Re-render the component and program a re-fetch on next render
-      nav(`/search/${searchQuery}`);
+      nav(`/search/${localSearchQuery}`);
     }
   };
 
@@ -66,9 +72,9 @@ export default function SearchBar({ query }) {
             type="text"
             placeholder="Search..."
             className="bg-gray-200 dark:bg-gray-800 w-full mx-6 border-none outline-none text-black focus:ring-0 dark:text-gray-300 text-lg"
-            defaultValue={searchQuery}
+            defaultValue={localSearchQuery}
             onChange={(e) => {
-              setSearchQuery(e.target.value);
+              setLocalSearchQuery(e.target.value);
             }}
             onKeyDown={(e) => handleKeyDown(e)}
           />
