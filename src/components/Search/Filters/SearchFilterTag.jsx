@@ -44,4 +44,4 @@ export default function SearchFilterTag({ filterName }) {
 
 SearchFilterTag.propTypes = {
   filterName: PropTypes.string.isRequired,
-}
+};
