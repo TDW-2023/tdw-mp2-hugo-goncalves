@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 
 describe("RecipeCategory", () => {
-
   let store;
   beforeEach(() => {
     store = configureStore({
@@ -20,9 +19,10 @@ describe("RecipeCategory", () => {
     render(
       <Provider store={store}>
         <Router location={"/"} navigator={null}>
-        <RecipeCategory
-          categoryName="Test Category"
-          categoryImageURI="https://test.com/image.jpg" />
+          <RecipeCategory
+            categoryName="Test Category"
+            categoryImageURI="https://test.com/image.jpg"
+          />
         </Router>
       </Provider>,
     );
