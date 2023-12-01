@@ -4,7 +4,7 @@ import axios from "axios";
 const appId = import.meta.env.VITE_EDAMAM_APP_ID;
 const apiKey = import.meta.env.VITE_EDAMAM_API_KEY;
 
-const transformRecipesResponse = (response) => {
+export const transformRecipesResponse = (response) => {
   const responseHitsArray = response.hits;
 
   return responseHitsArray.map((hit) => {
@@ -24,6 +24,7 @@ const transformRecipesResponse = (response) => {
       mealType: recipe.mealType,
       dishType: recipe.dishType,
       nutrients: recipe.totalNutrients,
+      nextPage: response._links.next?.href,
     };
   });
 };
