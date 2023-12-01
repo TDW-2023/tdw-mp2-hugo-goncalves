@@ -1,4 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import axios from "axios";
 
 const appId = import.meta.env.VITE_EDAMAM_APP_ID;
 const apiKey = import.meta.env.VITE_EDAMAM_API_KEY;
@@ -27,15 +28,37 @@ const transformRecipesResponse = (response) => {
   });
 };
 
+const axiosBaseQuery =
+  ({ baseUrl } = { baseUrl: "" }) =>
+  async ({ url, method, data, params, headers }) => {
+    try {
+      const result = await axios({
+        url: baseUrl + url,
+        method,
+        data,
+        params,
+        headers,
+      });
+      return { data: result.data };
+    } catch (axiosError) {
+      const err = axiosError;
+      return {
+        error: {
+          status: err.response?.status,
+          data: err.response?.data || err.message,
+        },
+      };
+    }
+  };
+
 export const freeRecipesAPISlice = createApi({
   reducerPath: "recipesAPISlice",
-  baseQuery: fetchBaseQuery({
+  baseQuery: axiosBaseQuery({
     baseUrl: "https://api.edamam.com",
   }),
   endpoints: (builder) => ({
     getRandomRecipes: builder.query({
       query: () => {
-        console.log("appId", appId);
         return {
           url: "/api/recipes/v2",
           params: {
@@ -80,16 +103,56 @@ export const freeRecipesAPISlice = createApi({
         });
       },
     }),
+    getDietTypes: builder.query({
+      query: () => {
+        return {
+          url: "/doc/open-api/recipe-search-v2.json",
+        };
+      },
+      transformResponse: (response) => {
+        return response.paths["/api/recipes/v2"].get.parameters[7].items.enum;
+      },
+    }),
+    getHealthFilters: builder.query({
+      query: () => {
+        return {
+          url: "/doc/open-api/recipe-search-v2.json",
+        };
+      },
+      transformResponse: (response) => {
+        return response.paths["/api/recipes/v2"].get.parameters[8].items.enum;
+      },
+    }),
+    getCuisineTypes: builder.query({
+      query: () => {
+        return {
+          url: "/doc/open-api/recipe-search-v2.json",
+        };
+      },
+      transformResponse: (response) => {
+        return response.paths["/api/recipes/v2"].get.parameters[9].items.enum;
+      },
+    }),
     getRecipesFromSearch: builder.query({
-      query: (query) => {
+      query(args) {
+        const { query, filters } = args;
+        const urlParams = new URLSearchParams();
+
+        urlParams.append("type", "public");
+        urlParams.append("app_id", appId);
+        urlParams.append("app_key", apiKey);
+        urlParams.append("q", query);
+
+        for (const filterParam in filters) {
+          const filterValues = filters[filterParam];
+          filterValues.forEach((filterValue) => {
+            urlParams.append(filterParam, filterValue);
+          });
+        }
+
         return {
           url: "/api/recipes/v2",
-          params: {
-            type: "public",
-            app_id: appId,
-            app_key: apiKey,
-            q: query,
-          },
+          params: urlParams,
         };
       },
       transformResponse: (response) => {
@@ -133,6 +196,9 @@ export const freeRecipesAPISlice = createApi({
 export const {
   useGetRandomRecipesQuery,
   useGetRecipeCategoriesQuery,
+  useGetDietTypesQuery,
+  useGetHealthFiltersQuery,
+  useGetCuisineTypesQuery,
   useGetRecipeByCategoryQuery,
   useGetRecipesFromSearchQuery,
   useGetRecipeByIdQuery,
