@@ -6,7 +6,7 @@ import SearchBar from "../components/Search/SearchBar.jsx";
 export default function HomePage() {
   return (
     <>
-      <div className="flex flex-col bg-white dark:bg-gray-950 h-full space-y-16">
+      <div className="flex flex-col bg-white dark:bg-gray-950 h-full space-y-14">
         <SearchBar />
         <div className="container mx-auto mt-16 h-96">
           <DailyRecipeSuggestion />

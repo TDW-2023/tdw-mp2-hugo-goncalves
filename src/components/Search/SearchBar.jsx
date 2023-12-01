@@ -85,5 +85,5 @@ export default function SearchBar({ query }) {
 }
 
 SearchBar.propTypes = {
-  query: PropTypes.string.isRequired,
+  query: PropTypes.string,
 };

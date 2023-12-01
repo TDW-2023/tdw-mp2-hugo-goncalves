@@ -1,11 +1,6 @@
 import PropTypes from "prop-types";
 
-export default function RecipeItem({
-  recipeId,
-  recipeName,
-  recipeImage,
-  recipeDescription,
-}) {
+export default function RecipeItem({ recipeId, recipeName, recipeImage }) {
   return (
     <>
       <div className="m-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -24,11 +19,6 @@ export default function RecipeItem({
                 {recipeName ? recipeName : "Recipe Name Placeholder"}
               </h5>
             </a>
-            <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">
-              {recipeDescription
-                ? recipeDescription
-                : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam voluptatum cupiditate"}
-            </p>
             <a
               href={`/recipes/${recipeId}`}
               className="inline-flex items-center text-blue-600 hover:underline"

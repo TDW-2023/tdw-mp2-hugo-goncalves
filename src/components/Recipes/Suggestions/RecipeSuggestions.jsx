@@ -12,13 +12,13 @@ export default function RecipeSuggestions() {
             <span className="block">Yummy</span>
             <span className="block text-blue-600">Recipes</span>
           </h2>
-          <p className="max-w-xl mx-auto mt-4 text-xl text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-            magnam voluptatum cupiditate veritatis in, accusamus quisquam.
+          <p className="max-w-3xl mx-auto mt-4 text-xl text-gray-500 dark:text-gray-400">
+            Our carefully curated recipe collection promises a delightful fusion
+            of flavors, catering to all skill levels and tastes.
           </p>
         </div>
       </div>
-      <div className="container mx-auto h-full pb-16 grid grid-cols-3">
+      <div className="container mt-1 mx-auto h-full pb-16 grid grid-cols-3">
         {isLoading ? (
           <div>Loading...</div>
         ) : error ? (

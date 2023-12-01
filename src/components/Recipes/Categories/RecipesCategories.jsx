@@ -13,14 +13,15 @@ export default function RecipesCategories() {
           <span className="block text-blue-600">Categories</span>
         </h2>
         <p className="max-w-xl mx-auto mt-4 text-xl text-gray-500 dark:text-gray-400">
-          Some Food categories you may be interested in!
+          Check some of our most popular recipes categories.
         </p>
         <div className="flex flex-row mt-5 space-x-12">
           {isLoading ? (
             <div>Loading...</div>
           ) : error ? (
-            <div>Oh no, there was an error</div>
-          ) : data ? (
+            <div>Error</div>
+          ) : (
+            data &&
             data.map((category, index) => (
               <RecipeCategory
                 key={"RecipeCategory_" + index}
@@ -28,11 +29,6 @@ export default function RecipesCategories() {
                 categoryImageURI={category.image}
               />
             ))
-          ) : (
-            <>
-              <RecipeCategory />
-              <RecipeCategory />
-            </>
           )}
         </div>
       </div>

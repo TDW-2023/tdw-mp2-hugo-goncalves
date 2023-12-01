@@ -2,86 +2,87 @@ import Skeleton from "react-loading-skeleton";
 import { useGetRandomRecipesQuery } from "../../../redux/slices/freeRecipesAPISlice.js";
 
 import "react-loading-skeleton/dist/skeleton.css";
+import RecipeMetric from "../Information/RecipeMetric.jsx";
+import { useMemo } from "react";
+import RecipeTagsGroup from "../Tags/RecipeTagsGroup.jsx";
 
 export default function DailyRecipeSuggestion() {
-  const { data, error, isLoading } = useGetRandomRecipesQuery();
+  const { data, isLoading } = useGetRandomRecipesQuery();
 
-  return (
-    <>
-      <div className="flex flex-row h-full max-h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <div className="basis-5/12 h-full">
-          {isLoading ? (
-            <Skeleton className="w-full h-full align-middle rounded-lg rounded-e-none shadow-xl" />
-          ) : error ? (
-            <p>Something went wrong...</p>
-          ) : (
-            data && (
-              <img
-                className="w-full h-full object-cover rounded-lg rounded-e-none shadow-xl"
-                src={data[0].image}
-                alt="Daily Recipe Image"
-              />
-            )
+  const recipeIndex = useMemo(() => Math.round(Math.random() * 20), []);
+
+  const regularComponent = (
+    <div className="flex flex-row h-full max-h-full bg-white border border-gray-200 rounded-3xl shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="basis-5/12 h-full">
+        {data && (
+          <img
+            className="w-full h-full object-cover rounded-3xl rounded-e-none shadow-xl"
+            src={data[recipeIndex].image}
+            alt="Daily Recipe Image"
+          />
+        )}
+      </div>
+      <div className="basis-7/12 m-8">
+        <a href={`/recipes/${data && data[recipeIndex].id}`}>
+          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+            <span className="block">Daily Suggestion</span>
+            <span className="block text-blue-600">
+              {data && data[recipeIndex].title}
+            </span>
+          </h2>
+        </a>
+        <div className="flex mt-2">
+          <RecipeTagsGroup tags={data && data[recipeIndex].tags} maxTags={5} />
+        </div>
+        <div className="flex flex-row grow justify-around mt-16">
+          <RecipeMetric
+            name={"Calories"}
+            value={data && Math.round(data[recipeIndex].calories)}
+            unit={"kcal"}
+          />
+          <RecipeMetric
+            name={"Ingredients"}
+            value={data && data[recipeIndex].ingredients.length}
+          />
+          {data && data[recipeIndex].time > 0 && (
+            <RecipeMetric
+              name={"Time"}
+              value={data[recipeIndex].time}
+              unit={"min"}
+            />
           )}
         </div>
-        <div className="basis-7/12 m-8">
-          <a href="#">
-            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-              <span className="block">
-                {isLoading ? (
-                  <Skeleton className="mb-4 h-12" />
-                ) : (
-                  "Daily Suggestion"
-                )}
-              </span>
-              <span className="block text-blue-600">
-                {isLoading ? (
-                  <Skeleton />
-                ) : error ? (
-                  <p>Something went wrong...</p>
-                ) : (
-                  data && data[0].title
-                )}
-              </span>
-            </h2>
-          </a>
-          <div className="mt-8">
-            {isLoading ? (
-              <Skeleton count={3} />
-            ) : error ? (
-              <p>Something went wrong...</p>
-            ) : (
-              <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">
-                {data && data[0].description}
-              </p>
-            )}
-            {isLoading ? (
+      </div>
+    </div>
+  );
+
+  const skeletonComponent = (
+    <div className="flex flex-row h-full max-h-full bg-white border border-gray-200 rounded-3xl shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="basis-5/12 h-full">
+        <Skeleton className="w-full h-full align-middle rounded-3xl rounded-e-none shadow-xl" />
+      </div>
+      <div className="basis-7/12 m-8">
+        <a href="#">
+          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+            <span className="block">
+              <Skeleton className="mb-4 h-12" />
+            </span>
+            <span className="block text-blue-600">
               <Skeleton />
-            ) : error ? (
-              <p>Something went wrong...</p>
-            ) : (
-              <a
-                href={data && `recipes/${data[0].id}`}
-                className="inline-flex items-center text-blue-600 hover:underline"
-              >
-                Check it out
-                <svg
-                  className="w-3 h-3 ms-2.5 rtl:rotate-[270deg]"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"
-                  />
-                </svg>
-              </a>
-            )}
-          </div>
+            </span>
+          </h2>
+        </a>
+        <div className="flex mt-2">
+          <Skeleton className="w-full h-12" />
+        </div>
+        <div className="flex flex-row grow justify-around mt-16">
+          <Skeleton className="w-full h-12" />
+          <Skeleton className="w-full h-12" />
+          <Skeleton className="w-full h-12" />
         </div>
       </div>
-    </>
+    </div>
   );
+
+  return <>{isLoading ? skeletonComponent : regularComponent}</>;
 }
