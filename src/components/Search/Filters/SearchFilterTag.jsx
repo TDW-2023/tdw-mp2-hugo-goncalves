@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addSelectedFilter, removeSelectedFilter } from "../../../redux/slices/searchSlice.js";
+import {
+  addSelectedFilter,
+  removeSelectedFilter,
+} from "../../../redux/slices/searchSlice.js";
 import PropTypes from "prop-types";
 
 export default function SearchFilterTag({ filterName }) {

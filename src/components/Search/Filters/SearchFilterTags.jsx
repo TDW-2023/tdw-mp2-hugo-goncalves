@@ -2,7 +2,7 @@ import {
   useGetCuisineTypesQuery,
   useGetDietTypesQuery,
   useGetHealthFiltersQuery,
-  useGetRecipeCategoriesQuery
+  useGetRecipeCategoriesQuery,
 } from "../../../redux/slices/freeRecipesAPISlice.js";
 import { useSelector } from "react-redux";
 import SearchFilterTag from "./SearchFilterTag.jsx";
