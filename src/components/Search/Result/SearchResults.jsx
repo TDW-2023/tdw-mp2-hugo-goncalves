@@ -73,14 +73,13 @@ export default function SearchResults() {
           endMessage={noResultsComponent}
         >
           <div className="flex flex-col space-y-8">
-            {searchData && (
+            {searchData &&
               searchData.map((recipe, index) => (
                 <SearchResultItem
                   key={"SearchResultItem_" + index}
                   recipe={recipe}
                 />
-              ))
-            )}
+              ))}
           </div>
         </InfiniteScroll>
       </div>

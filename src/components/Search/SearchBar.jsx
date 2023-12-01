@@ -9,7 +9,6 @@ import {
 import PropTypes from "prop-types";
 
 export default function SearchBar({ query }) {
-
   const [localSearchQuery, setLocalSearchQuery] = useState(query);
   const [shouldReFetch, setShouldReFetch] = useState(true);
 
