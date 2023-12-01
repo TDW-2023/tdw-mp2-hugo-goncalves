@@ -19,8 +19,9 @@ export default function RecipesCategories() {
           {isLoading ? (
             <div>Loading...</div>
           ) : error ? (
-            <div>Oh no, there was an error</div>
-          ) : data ? (
+            <div>Error</div>
+          ) : (
+            data &&
             data.map((category, index) => (
               <RecipeCategory
                 key={"RecipeCategory_" + index}
@@ -28,11 +29,6 @@ export default function RecipesCategories() {
                 categoryImageURI={category.image}
               />
             ))
-          ) : (
-            <>
-              <RecipeCategory />
-              <RecipeCategory />
-            </>
           )}
         </div>
       </div>
