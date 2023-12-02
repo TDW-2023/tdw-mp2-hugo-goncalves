@@ -17,9 +17,9 @@ export default function RecipePage() {
 
   return (
     <>
-      <div className="flex bg-white dark:bg-gray-950 min-h-screen">
-        <div className="container mx-auto my-12 ">
-          <div className="flex flex-row space-x-12 grow">
+      <div className="flex flex-wrap bg-white dark:bg-gray-950 min-h-screen">
+        <div className="container mx-5 sm:mx-auto my-12 ">
+          <div className="flex flex-wrap flex-row xl:space-x-12 grow">
             <RecipeImage recipeImage={recipe.image} scale={"large"} />
             <div className="flex justify-between grow">
               <div className="flex flex-col">
@@ -31,7 +31,7 @@ export default function RecipePage() {
                 <div className="mt-2">
                   <RecipeTagsGroup tags={recipe.tags} />
                 </div>
-                <div className="flex flex-row justify-around mt-12">
+                <div className="flex flex-row flex-wrap justify-around mt-12">
                   {recipe.time ? (
                     <RecipeMetric
                       name={"Time"}
@@ -61,13 +61,13 @@ export default function RecipePage() {
             </div>
           </div>
           <hr className="h-px mb-8 mt-10 bg-gray-200 border-0 dark:bg-gray-700" />
-          <div className="grid grid-cols-3 space-x-8">
-            <div className="col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 lg:space-x-8">
+            <div className="lg:col-span-2">
               <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">
                 Ingredients
               </h2>
 
-              <div className="grid grid-cols-5 gap-x-8 pb-12">
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-x-8 pb-12">
                 {recipe.ingredients &&
                   recipe.ingredients.map((ingredient, index) => (
                     <RecipeIngredient

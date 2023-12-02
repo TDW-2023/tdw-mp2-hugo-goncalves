@@ -20,7 +20,7 @@ export default function RecipeImage({ recipeImage, scale }) {
   else if (scale === "large")
     return (
       <img
-        className="h-64 max-h-64 rounded-lg"
+        className="h-16 md:h-64 max-h-64 rounded-lg"
         src={recipeImage ? recipeImage : "https://placeholder.co/256"}
         alt="Search Result Recipe Image"
       />

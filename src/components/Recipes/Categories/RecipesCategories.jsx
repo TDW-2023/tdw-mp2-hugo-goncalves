@@ -15,7 +15,7 @@ export default function RecipesCategories() {
         <p className="max-w-xl mx-auto mt-4 text-xl text-gray-500 dark:text-gray-400">
           Check some of our most popular recipes categories.
         </p>
-        <div className="flex flex-row mt-5 space-x-12">
+        <div className="flex flex-row flex-wrap mt-5 lg:space-x-12">
           {isLoading ? (
             <div>Loading...</div>
           ) : error ? (

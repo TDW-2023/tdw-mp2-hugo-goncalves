@@ -8,7 +8,7 @@ export default function HomePage() {
     <>
       <div className="flex flex-col bg-white dark:bg-gray-950 h-full space-y-14">
         <SearchBar />
-        <div className="container mx-auto mt-16 h-96">
+        <div className="container mx-5 sm:mx-auto mt-16 h-96">
           <DailyRecipeSuggestion />
         </div>
         <RecipesCategories />
