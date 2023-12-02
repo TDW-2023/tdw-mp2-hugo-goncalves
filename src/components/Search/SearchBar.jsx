@@ -7,29 +7,18 @@ import {
   setNextPageUrl,
 } from "../../redux/slices/searchSlice.js";
 import PropTypes from "prop-types";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid/index.js";
+import { transformFilters } from "../../utils/searchFiltersOperations.js";
 
 export default function SearchBar({ query }) {
   const [localSearchQuery, setLocalSearchQuery] = useState(query);
   const [shouldReFetch, setShouldReFetch] = useState(!!query);
+  const [outdatedResults, setOutdatedResults] = useState(false);
 
   const dispatch = useDispatch();
   const selectedFilters = useSelector((state) => state.search.selectedFilters);
 
   const nav = useNavigate();
-
-  const transformFilters = () => {
-    const filters = {};
-
-    selectedFilters.forEach((filter) => {
-      if (Object.prototype.hasOwnProperty.call(filters, filter.filterType.id)) {
-        filters[filter.filterType.id].push(filter.filterName);
-      } else {
-        filters[filter.filterType.id] = [filter.filterName];
-      }
-    });
-
-    return filters;
-  };
 
   const { data } = useGetRecipesFromSearchQuery(
     { query: localSearchQuery, filters: transformFilters(selectedFilters) },
@@ -37,47 +26,65 @@ export default function SearchBar({ query }) {
   );
 
   useEffect(() => {
+
     dispatch(setSearchResults(data));
+    setOutdatedResults(false);
+
     if (data) {
       dispatch(setNextPageUrl(data[0]?.nextPage));
       setShouldReFetch(false); // Disable re-fetching
     }
+
   }, [data, dispatch]);
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      if (!localSearchQuery || localSearchQuery === "") {
-        console.log("No search query");
-        return;
-      }
-      setShouldReFetch(true); // Re-render the component and program a re-fetch on next render
-      nav(`/search/${localSearchQuery}`);
+  useEffect(() => {
+    // If the selected filters change, let user know he should press enter to search again
+    if (selectedFilters && selectedFilters.length > 0) {
+      setOutdatedResults(true);
+    } else if (selectedFilters && selectedFilters.length === 0) {
+      setOutdatedResults(false);
     }
+  }, [selectedFilters]);
+
+  const handleSearch = (event) => {
+
+    if (event.type === "keydown" && event.key !== "Enter") return;
+
+    if (!localSearchQuery || localSearchQuery === "") {
+      console.log("No search query");
+      return;
+    }
+
+    setShouldReFetch(true); // Re-render the component and program a re-fetch on next render
+    nav(`/search/${localSearchQuery}`);
+
   };
 
   return (
     <>
       <div className="flex flex-row justify-center mt-14">
-        <div className="flex flex-row items-center p-4 w-5/12 rounded-3xl bg-gray-200 dark:bg-gray-800">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-8 h-8 text-gray-600 dark:text-gray-300"
-          >
-            <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-          </svg>
-          <input
-            type="text"
-            placeholder="Search..."
-            className="bg-gray-200 dark:bg-gray-800 w-full mx-6 border-none outline-none text-black focus:ring-0 dark:text-gray-300 text-lg"
-            defaultValue={localSearchQuery}
-            onChange={(e) => {
-              setLocalSearchQuery(e.target.value);
-            }}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
+        <div className="flex flex-row items-center p-4 w-5/12 rounded-3xl bg-gray-200 dark:bg-gray-800 outline outline-blue-500 outline-4">
+          <div className="flex basis-11/12">
+            <MagnifyingGlassIcon className="w-10 h-10 text-gray-600" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="bg-gray-200 dark:bg-gray-800 w-full ms-4 me-6 border-none outline-none text-black focus:ring-0 dark:text-gray-300 text-lg"
+              defaultValue={localSearchQuery}
+              onChange={(e) => {
+                setLocalSearchQuery(e.target.value);
+                if (e.target.value && e.target.value !== query) {
+                  setOutdatedResults(true);
+                } else {
+                  setOutdatedResults(false);
+                }
+              }}
+              onKeyDown={(e) => handleSearch(e)}
+            />
+          </div>
+          <div className="flex">
+            {outdatedResults && <p className="font-bold text-blue-600 text-lg mx-2 animate-pulse hover:cursor-pointer" onClick={handleSearch}>Search</p>}
+          </div>
         </div>
       </div>
     </>
