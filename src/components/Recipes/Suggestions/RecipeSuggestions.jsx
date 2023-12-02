@@ -18,13 +18,14 @@ export default function RecipeSuggestions() {
           </p>
         </div>
       </div>
-      <div className="container mt-1 mx-auto h-full pb-16 grid grid-cols-3">
+      <div className="container mt-1 mx-auto h-full pb-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {isLoading ? (
           <div>Loading...</div>
         ) : error ? (
           <div>Oh no, there was an error</div>
-        ) : data ? (
-          data.map((recipe, index) => {
+        ) : (
+          data &&
+          data.slice(0, 18).map((recipe, index) => {
             return (
               <RecipeItem
                 key={"RecipeItem_" + index}
@@ -35,12 +36,6 @@ export default function RecipeSuggestions() {
               />
             );
           })
-        ) : (
-          <>
-            <RecipeItem />
-            <RecipeItem />
-            <RecipeItem />
-          </>
         )}
       </div>
     </>

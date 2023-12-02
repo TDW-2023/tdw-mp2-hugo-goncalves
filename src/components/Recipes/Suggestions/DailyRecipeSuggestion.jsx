@@ -31,10 +31,10 @@ export default function DailyRecipeSuggestion() {
             </span>
           </h2>
         </a>
-        <div className="flex mt-2">
+        <div className="flex mt-2 invisible md:visible">
           <RecipeTagsGroup tags={data && data[recipeIndex].tags} maxTags={5} />
         </div>
-        <div className="flex flex-row grow justify-around mt-16">
+        <div className="flex flex-row grow justify-around mt-16 invisible lg:visible">
           <RecipeMetric
             name={"Calories"}
             value={data && Math.round(data[recipeIndex].calories)}
