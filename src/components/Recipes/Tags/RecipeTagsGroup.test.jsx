@@ -18,8 +18,8 @@ describe("RecipeTagsGroup component", () => {
       "Soy-free",
       "Egg-free",
     ];
-    render(<RecipeTagsGroup tags={tags} />);
-    const ellipsisElement = screen.getByText("...");
+    render(<RecipeTagsGroup tags={tags} maxTags={4} />);
+    const ellipsisElement = screen.getByText("+2");
     expect(ellipsisElement).toBeInTheDocument();
   });
 
