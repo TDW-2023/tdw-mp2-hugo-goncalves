@@ -9,6 +9,7 @@ import {
 import PropTypes from "prop-types";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid/index.js";
 import { transformFilters } from "../../utils/searchFiltersOperations.js";
+import { toast } from "react-toastify";
 
 export default function SearchBar({ query }) {
   const [localSearchQuery, setLocalSearchQuery] = useState(query);
@@ -48,7 +49,7 @@ export default function SearchBar({ query }) {
     if (event.type === "keydown" && event.key !== "Enter") return;
 
     if (!localSearchQuery || localSearchQuery === "") {
-      console.log("No search query");
+      toast.info("Please enter a search query!");
       return;
     }
 
