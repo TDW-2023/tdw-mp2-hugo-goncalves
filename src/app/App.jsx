@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage.jsx";
 import Navbar from "../components/Navbar/Navbar.jsx";
 import SearchPage from "../pages/SearchPage.jsx";
 import RecipePage from "../pages/RecipePage.jsx";
+import AboutPage from "../pages/AboutPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/recipes/:recipeId",
     element: <RecipePage />,
+  },
+  {
+    path: "/about",
+    element: <AboutPage />,
   },
 ]);
 
