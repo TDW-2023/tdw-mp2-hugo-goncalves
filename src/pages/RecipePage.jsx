@@ -18,7 +18,7 @@ export default function RecipePage() {
   return (
     <>
       <div className="flex flex-wrap bg-white dark:bg-gray-950 min-h-screen">
-        <div className="container lg:mx-auto my-12 ">
+        <div className="container mx-5 sm:mx-auto my-12 ">
           <div className="flex flex-wrap flex-row xl:space-x-12 grow">
             <RecipeImage recipeImage={recipe.image} scale={"large"} />
             <div className="flex justify-between grow">
