@@ -26,7 +26,6 @@ export default function SearchBar({ query }) {
   );
 
   useEffect(() => {
-
     dispatch(setSearchResults(data));
     setOutdatedResults(false);
 
@@ -34,7 +33,6 @@ export default function SearchBar({ query }) {
       dispatch(setNextPageUrl(data[0]?.nextPage));
       setShouldReFetch(false); // Disable re-fetching
     }
-
   }, [data, dispatch]);
 
   useEffect(() => {
@@ -47,7 +45,6 @@ export default function SearchBar({ query }) {
   }, [selectedFilters]);
 
   const handleSearch = (event) => {
-
     if (event.type === "keydown" && event.key !== "Enter") return;
 
     if (!localSearchQuery || localSearchQuery === "") {
@@ -57,7 +54,6 @@ export default function SearchBar({ query }) {
 
     setShouldReFetch(true); // Re-render the component and program a re-fetch on next render
     nav(`/search/${localSearchQuery}`);
-
   };
 
   return (
@@ -83,7 +79,14 @@ export default function SearchBar({ query }) {
             />
           </div>
           <div className="flex">
-            {outdatedResults && <p className="font-bold text-blue-600 text-lg mx-2 animate-pulse hover:cursor-pointer" onClick={handleSearch}>Search</p>}
+            {outdatedResults && (
+              <p
+                className="font-bold text-blue-600 text-lg mx-2 animate-pulse hover:cursor-pointer"
+                onClick={handleSearch}
+              >
+                Search
+              </p>
+            )}
           </div>
         </div>
       </div>
