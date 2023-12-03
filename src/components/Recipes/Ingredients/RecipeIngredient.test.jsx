@@ -40,8 +40,10 @@ describe("RecipeIngredient component", () => {
       text: "A fresh apple",
     };
     render(<RecipeIngredient ingredient={ingredient} />);
-    const quantityMeasureElement = screen.getByText(/1 piece/i);
+    const quantityMeasureElement = screen.getAllByText(/1.0/i)[0];
+    const unitMeasureElement = screen.getByText(/piece/i);
     expect(quantityMeasureElement).toBeInTheDocument();
+    expect(unitMeasureElement).toBeInTheDocument();
   });
 
   it("renders the ingredient weight correctly", () => {
