@@ -14,7 +14,16 @@ export default function RecipeIngredient({ ingredient }) {
             {ingredient.food}
           </h3>
           <p className="text-blue-500 font-bold">
-            <span className="text-blue-500">{`${ingredient.quantity} ${ingredient.measure}`}</span>
+            <span className="text-blue-500">
+              {ingredient.quantity > 0
+                ? parseFloat(ingredient.quantity).toFixed(1) + " "
+                : null}
+            </span>
+            <span className="text-blue-500">
+              {ingredient.measure !== "null" && ingredient.measure !== "<unit>"
+                ? ingredient.measure
+                : null}
+            </span>
             <span className="text-gray-500 ms-1">{`(${Math.round(
               ingredient.weight,
             )} g)`}</span>
